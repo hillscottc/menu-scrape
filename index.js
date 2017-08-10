@@ -1,7 +1,10 @@
-const request = require("tinyreq");
+const request = require("request");
 const Promise = require('es6-promise').Promise;
 
-const url = "http://ionicabizau.net/";
+
+
+const url = "https://raw.githubusercontent.com/hillscottc/menu-scrape/master/README.md";
+
 
 
 function requestp(url, json) {
@@ -21,6 +24,9 @@ function requestp(url, json) {
 }
 
 
-request(url, function (err, body) {
-  console.log(err || body); // Print out the HTML
+requestp(url, false).then(function (data) {
+  console.log("%s@%s: %s", data.name, data.version, data.description);
+}, function (err) {
+  console.error("%s; %s", err.message, url);
+  console.log("%j", err.res.statusCode);
 });
